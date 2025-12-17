@@ -170,92 +170,6 @@
       font-weight: bold;
     }
     
-    /* القائمة الرئيسية */
-    .main-nav {
-      display: flex;
-      justify-content: center;
-      background: rgba(30, 30, 30, 0.95);
-      padding: 15px;
-      border-bottom: 1px solid rgba(255, 77, 77, 0.3);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-    }
-    
-    .nav-button {
-      margin: 0 10px;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, 
-        rgba(139, 0, 0, 0.85), 
-        rgba(179, 0, 0, 0.8));
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 77, 77, 0.25);
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      min-width: 120px;
-      text-align: center;
-    }
-    
-    .nav-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, 
-        transparent 30%, 
-        rgba(255, 255, 255, 0.15) 50%, 
-        transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-      z-index: -1;
-    }
-    
-    .nav-button:hover::before {
-      transform: translateX(100%);
-    }
-    
-    .nav-button:hover {
-      background: linear-gradient(135deg, 
-        rgba(179, 0, 0, 0.9), 
-        rgba(255, 77, 77, 0.85));
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(139, 0, 0, 0.5),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 77, 77, 0.4);
-    }
-    
-    .nav-button.active {
-      background: linear-gradient(135deg, 
-        rgba(255, 77, 77, 0.9), 
-        rgba(179, 0, 0, 0.85));
-      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 77, 77, 0.5);
-    }
-    
-    .nav-button.active::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 20%;
-      width: 60%;
-      height: 3px;
-      background: var(--light-red);
-      border-radius: 2px;
-      animation: pulse 2s infinite;
-    }
-    
     .container {
       max-width: 1300px;
       margin: auto;
@@ -263,6 +177,39 @@
       text-align: center;
       position: relative;
       z-index: 1;
+    }
+    
+    /* زر الرجوع */
+    .back-button {
+      margin: 15px 0 25px 0;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, 
+        rgba(68, 68, 68, 0.9), 
+        rgba(102, 102, 102, 0.85));
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .back-button:hover {
+      background: linear-gradient(135deg, 
+        rgba(102, 102, 102, 0.9), 
+        rgba(136, 136, 136, 0.85));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    .back-button::before {
+      content: '←';
+      font-size: 18px;
     }
     
     /* صفحة الرئيسية الجديدة */
@@ -293,6 +240,50 @@
       line-height: 1.8;
     }
 
+    /* تحسين شكل الأسماء */
+    .command-structure {
+      background: rgba(139, 0, 0, 0.15);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 77, 77, 0.2);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .command-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .command-row:last-child {
+      border-bottom: none;
+    }
+
+    .command-title {
+      color: var(--text-gold);
+      font-size: 18px;
+      font-weight: bold;
+      min-width: 150px;
+      text-align: left;
+    }
+
+    .command-name {
+      color: var(--light-red);
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+      background: rgba(139, 0, 0, 0.2);
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 77, 77, 0.3);
+      flex-grow: 1;
+      text-align: center;
+      margin-right: 15px;
+    }
+    
     .start-button {
       background: linear-gradient(135deg, 
         rgba(139, 0, 0, 0.95), 
@@ -439,7 +430,7 @@
       bottom: 0;
       background: linear-gradient(45deg, 
         transparent 30%, 
-        rgba(255, 255, 255, 0.03) 50%, 
+        rgba(255, 255,255, 0.03) 50%, 
         transparent 70%);
       transform: translateX(-100%);
       transition: transform 0.6s ease;
@@ -510,6 +501,17 @@
     
     input[type="date"]::-webkit-calendar-picker-indicator:hover {
       opacity: 1;
+    }
+
+    /* إزالة الأسهم من input[type="number"] */
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
 
     .add-btn {
@@ -889,18 +891,6 @@
         font-size: 24px;
       }
       
-      .nav-button {
-        padding: 10px 15px;
-        font-size: 14px;
-        margin: 5px;
-        min-width: 100px;
-      }
-      
-      .main-nav {
-        flex-wrap: wrap;
-        padding: 10px;
-      }
-      
       .welcome-title {
         font-size: 28px;
       }
@@ -916,6 +906,24 @@
       
       h2.section-title {
         font-size: 22px;
+      }
+      
+      .command-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+      }
+      
+      .command-title, .command-name {
+        font-size: 16px;
+        min-width: auto;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .command-name {
+        padding: 6px 12px;
+        margin-right: 0;
       }
     }
     
@@ -941,12 +949,10 @@
 <div class="particles" id="particles"></div>
 <header><h1>الشرطة العسكرية</h1></header>
 
-<!-- القائمة الرئيسية -->
-<nav class="main-nav">
-  <button class="nav-button active" onclick="showPage('calls')">📋 سجل الاستدعاءات</button>
-</nav>
-
 <div class="container">
+  <!-- زر الرجوع (يظهر في صفحة الاستدعاءات فقط) -->
+  <button class="back-button" id="backButton" onclick="showHomePage()" style="display: none;">العودة للرئيسية</button>
+  
   <!-- المحتوى الرئيسي -->
   <div id="mainContent">
     <!-- الصفحة الرئيسية -->
@@ -954,9 +960,23 @@
       <div class="home-page">
         <h1 class="welcome-title">أهلاً بك في سجل الاستدعاءات</h1>
         <div class="welcome-subtitle">
-          نظام إدارة استدعاءات العسكريين وتتبع أوقاتها والتحكم في سبب الحكم
+          نظام إدارة استدعاءات العساكر وتتبع أوقاتها والتحكم في سبب الاستدعاء
+          <div class="command-structure">
+            <div class="command-row">
+              <span class="command-title">بقيادة:</span>
+              <span class="command-name">أيمن القحطاني</span>
+            </div>
+            <div class="command-row">
+              <span class="command-title">نائب القائد:</span>
+              <span class="command-name">مشعل الضبعاني</span>
+            </div>
+            <div class="command-row">
+              <span class="command-title">مستشار القائد:</span>
+              <span class="command-name">عزيز الضويحي</span>
+            </div>
+          </div>
         </div>
-        <button class="start-button" onclick="showPage('calls')">ابدأ</button>
+        <button class="start-button" onclick="showCallsPage()">ابدأ</button>
       </div>
     </div>
     
@@ -991,70 +1011,78 @@ createParticles();
 
 // متغيرات التطبيق
 let currentPage = 'home';
-const DAY = 86400000;
 let calls = JSON.parse(localStorage.getItem('calls') || '[]');
 let timers = {};
 let activeDropdown = null;
 
-// دالة إظهار الصفحة
-function showPage(pageId) {
-  // تحديث القائمة النشطة
-  document.querySelectorAll('.nav-button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  
-  // تحديث الزر النشط في القائمة
-  document.querySelector('.nav-button').classList.add('active');
+// دالة العودة للصفحة الرئيسية
+function showHomePage() {
+  // إخفاء زر الرجوع
+  const backButton = document.getElementById('backButton');
+  backButton.style.display = 'none';
   
   // إخفاء جميع الصفحات
   document.querySelectorAll('.page-content').forEach(page => {
     page.style.display = 'none';
   });
   
-  // إظهار الصفحة المحددة
-  const targetPage = document.getElementById(pageId + 'Page');
-  targetPage.style.display = 'block';
+  // إظهار الصفحة الرئيسية
+  const homePage = document.getElementById('homePage');
+  homePage.style.display = 'block';
+  
+  // حفظ الصفحة الحالية
+  currentPage = 'home';
+}
+
+// دالة إظهار صفحة الاستدعاءات
+function showCallsPage() {
+  // إظهار زر الرجوع
+  const backButton = document.getElementById('backButton');
+  backButton.style.display = 'inline-flex';
+  
+  // إخفاء جميع الصفحات
+  document.querySelectorAll('.page-content').forEach(page => {
+    page.style.display = 'none';
+  });
+  
+  // إظهار صفحة الاستدعاءات
+  const callsPage = document.getElementById('callsPage');
+  callsPage.style.display = 'block';
   
   // تحميل المحتوى إذا كان فارغاً
-  if (targetPage.innerHTML.trim() === '' || targetPage.getAttribute('data-loaded') !== 'true') {
-    loadPageContent(pageId);
-    targetPage.setAttribute('data-loaded', 'true');
+  if (callsPage.innerHTML.trim() === '' || callsPage.getAttribute('data-loaded') !== 'true') {
+    loadCallsPage();
+    callsPage.setAttribute('data-loaded', 'true');
   }
   
   // حفظ الصفحة الحالية
-  currentPage = pageId;
+  currentPage = 'calls';
   
-  // إذا كانت صفحة الاستدعاءات، نعيد تحميل الجدول
-  if (pageId === 'calls') {
-    renderRows();
-  }
+  // تحميل الجدول
+  renderRows();
 }
 
-// دالة تحميل محتوى الصفحة
-function loadPageContent(pageId) {
-  const targetPage = document.getElementById(pageId + 'Page');
+// دالة تحميل صفحة الاستدعاءات
+function loadCallsPage() {
+  const callsPage = document.getElementById('callsPage');
   
-  switch(pageId) {
-    case 'calls':
-      targetPage.innerHTML = `
-        <h2 class='section-title'>سجل الاستدعاءات</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>الاسم</th>
-              <th>سبب الحكم</th>
-              <th>تاريخ الاستدعاء</th>
-              <th>وقت الاستدعاء</th>
-              <th>المتبقي</th>
-              <th>إجراءات</th>
-            </tr>
-          </thead>
-          <tbody id='tbody'></tbody>
-        </table>
-        <button class='add-btn' onclick='addRow()'>+ إضافة عسكري</button>`;
-      break;
-  }
+  callsPage.innerHTML = `
+    <h2 class='section-title'>سجل الاستدعاءات</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>الاسم</th>
+          <th>سبب الاستدعاء</th>
+          <th>تاريخ الاستدعاء</th>
+          <th>وقت الاستدعاء</th>
+          <th>المتبقي</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id='tbody'></tbody>
+    </table>
+    <button class='add-btn' onclick='addRow()'>+ إضافة عسكري</button>`;
 }
 
 function saveCalls() {
@@ -1093,7 +1121,7 @@ function renderRows() {
       <td id="rule-cell-${i}"></td>
       <td><input type='date' value='${c.callDate || ''}' oninput="calls[${i}].callDate=this.value;saveCalls()" style="width: 140px;"></td>
       <td class='time-cell'>
-        <input placeholder='11 أو 11:40' id='time-input-${i}'>
+        <input placeholder='11 أو 11:40' id='time-input-${i}' type='text'>
         <select id='period-select-${i}'>
           <option>صباحي</option>
           <option>مسائي</option>
@@ -1155,19 +1183,29 @@ function confirmTime(i) {
     }
   }
   
-  if (period === 'مسائي' && hours < 12) {
-    hours += 12;
-  } else if (period === 'صباحي' && hours === 12) {
-    hours = 0;
-  }
-  
-  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-    alert('الوقت غير صحيح');
+  // التحقق من أن الوقت بين 1 و 12
+  if (hours < 1 || hours > 12) {
+    alert('الرجاء إدخال وقت بين 1 و 12 فقط');
     return;
   }
   
+  // التحقق من الدقائق
+  if (minutes < 0 || minutes > 59) {
+    alert('الدقائق يجب أن تكون بين 0 و 59');
+    return;
+  }
+  
+  let finalHours = hours;
+  
+  // تحويل الوقت بناءً على الفترة
+  if (period === 'مسائي' && hours < 12) {
+    finalHours += 12;
+  } else if (period === 'صباحي' && hours === 12) {
+    finalHours = 0;
+  }
+  
   const [year, month, day] = dateValue.split('-').map(Number);
-  const callTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
+  const callTime = new Date(year, month - 1, day, finalHours, minutes, 0, 0);
   
   calls[i].end = callTime.getTime();
   saveCalls();
@@ -1336,8 +1374,8 @@ function createRuleSelect(selectedRule, index) {
   
   const select = document.createElement('div');
   select.className = 'rule-select';
-  select.textContent = selectedRule || 'اختر سبب الحكم';
-  select.title = selectedRule || 'اختر سبب الحكم';
+  select.textContent = selectedRule || 'اختر سبب الاستدعاء';
+  select.title = selectedRule || 'اختر سبب الاستدعاء';
   
   wrapper.appendChild(select);
   
@@ -1365,7 +1403,7 @@ function openRulesDropdown(selectElement, wrapper, index, selectedRule) {
   
   const title = document.createElement('div');
   title.className = 'dropdown-title';
-  title.textContent = 'اختيار سبب الحكم';
+  title.textContent = 'اختيار سبب الاستدعاء';
   
   const closeBtn = document.createElement('button');
   closeBtn.className = 'close-dropdown';
@@ -1484,7 +1522,7 @@ function closeAllDropdowns() {
 // تهيئة الصفحة عند التحميل
 window.onload = function() {
   // عرض الصفحة الرئيسية افتراضياً
-  showPage('home');
+  showHomePage();
 };
 </script>
 </body>
