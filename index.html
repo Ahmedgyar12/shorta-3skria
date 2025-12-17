@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>الشرطة العسكرية</title>
+  <title>الشرطة العسكرية - سجل الاستدعاءات</title>
   <style>
     :root {
       --primary-red: #8b0000;
@@ -265,39 +265,6 @@
       z-index: 1;
     }
     
-    /* زر الرجوع */
-    .back-button {
-      margin: 15px 0 25px 0;
-      padding: 10px 24px;
-      background: linear-gradient(135deg, 
-        rgba(68, 68, 68, 0.9), 
-        rgba(102, 102, 102, 0.85));
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .back-button:hover {
-      background: linear-gradient(135deg, 
-        rgba(102, 102, 102, 0.9), 
-        rgba(136, 136, 136, 0.85));
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-    }
-    
-    .back-button::before {
-      content: '←';
-      font-size: 18px;
-    }
-    
     /* صفحة الرئيسية الجديدة */
     .home-page {
       animation: fadeInUp 0.8s ease;
@@ -326,50 +293,6 @@
       line-height: 1.8;
     }
 
-    /* تحسين شكل الأسماء */
-    .command-structure {
-      background: rgba(139, 0, 0, 0.15);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(255, 77, 77, 0.2);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .command-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .command-row:last-child {
-      border-bottom: none;
-    }
-
-    .command-title {
-      color: var(--text-gold);
-      font-size: 18px;
-      font-weight: bold;
-      min-width: 150px;
-      text-align: left;
-    }
-
-    .command-name {
-      color: var(--light-red);
-      font-size: 18px;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-      background: rgba(139, 0, 0, 0.2);
-      padding: 8px 15px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 77, 77, 0.3);
-      flex-grow: 1;
-      text-align: center;
-      margin-right: 15px;
-    }
-    
     .start-button {
       background: linear-gradient(135deg, 
         rgba(139, 0, 0, 0.95), 
@@ -419,88 +342,6 @@
       }
     }
     
-    /* قائمة اختيار بعد الضغط على بدأ */
-    .selection-menu {
-      display: none;
-      margin-top: 40px;
-      animation: fadeInUp 0.8s ease;
-      width: 100%;
-      max-width: 800px;
-    }
-    
-    .selection-title {
-      font-size: 26px;
-      color: var(--light-red);
-      margin-bottom: 30px;
-      text-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
-    }
-    
-    .selection-cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px;
-    }
-    
-    .selection-card {
-      background: rgba(139, 0, 0, 0.2);
-      border-radius: 12px;
-      padding: 30px 20px;
-      width: 220px;
-      border: 2px solid rgba(255, 77, 77, 0.3);
-      transition: all 0.4s ease;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .selection-card:hover {
-      transform: translateY(-10px) scale(1.05);
-      background: rgba(139, 0, 0, 0.3);
-      box-shadow: 0 15px 35px rgba(139, 0, 0, 0.4),
-                  0 0 40px rgba(255, 77, 77, 0.3);
-      border-color: rgba(255, 77, 77, 0.5);
-    }
-    
-    .selection-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, 
-        transparent 30%, 
-        rgba(255, 255, 255, 0.1) 50%, 
-        transparent 70%);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-    
-    .selection-card:hover::before {
-      transform: translateX(100%);
-    }
-    
-    .card-icon {
-      font-size: 50px;
-      margin-bottom: 20px;
-      color: var(--light-red);
-    }
-    
-    .card-title {
-      color: white;
-      margin-bottom: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    
-    .card-desc {
-      color: #ccc;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    
-    /* بقية الأنماط */
     h2.section-title {
       margin: 35px 0 20px;
       font-size: 28px;
@@ -537,14 +378,6 @@
       }
     }
     
-    h3.degree-title {
-      margin-top: 40px;
-      color: white;
-      animation: fadeIn 0.8s ease;
-      font-size: 22px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
@@ -1027,266 +860,6 @@
       color: #999;
       font-style: italic;
     }
-
-    /* تحسينات صفحة البنود */
-    .rules-container {
-      background: rgba(30, 30, 30, 0.9);
-      border-radius: 14px;
-      padding: 25px;
-      margin-top: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      animation: fadeInUp 0.8s ease;
-      border: 1px solid rgba(255, 77, 77, 0.2);
-    }
-    
-    .rules-search-section {
-      margin-bottom: 30px;
-      text-align: center;
-    }
-    
-    .rules-search-title {
-      color: white;
-      font-size: 20px;
-      margin-bottom: 15px;
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-    }
-    
-    .rules-search-input {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 12px 20px;
-      background: rgba(20, 20, 20, 0.9);
-      color: white;
-      border: 1px solid rgba(68, 68, 68, 0.6);
-      border-radius: 8px;
-      font-size: 16px;
-      text-align: right;
-      transition: all 0.3s ease;
-    }
-    
-    .rules-search-input:focus {
-      outline: none;
-      border-color: var(--light-red);
-      box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2);
-    }
-    
-    .rules-content {
-      text-align: right;
-    }
-    
-    .rules-degree-section {
-      margin-top: 30px;
-      background: rgba(40, 40, 40, 0.7);
-      border-radius: 10px;
-      padding: 20px;
-      border-left: 4px solid var(--light-red);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-    }
-    
-    .rules-degree-section:hover {
-      transform: translateX(-5px);
-    }
-    
-    .rules-degree-list {
-      list-style: none;
-      padding: 0;
-      margin: 15px 0 0 0;
-    }
-    
-    .rules-degree-list li {
-      padding: 12px 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .rules-degree-list li:hover {
-      background: rgba(139, 0, 0, 0.15);
-      padding-right: 25px;
-    }
-    
-    .rules-degree-list li.copied {
-      background: rgba(0, 139, 0, 0.2);
-      color: #4CAF50;
-      animation: copyFlash 0.5s ease;
-    }
-    
-    @keyframes copyFlash {
-      0% { background: rgba(0, 139, 0, 0.1); }
-      50% { background: rgba(0, 139, 0, 0.3); }
-      100% { background: rgba(0, 139, 0, 0.2); }
-    }
-    
-    .copy-indicator {
-      font-size: 12px;
-      color: #4CAF50;
-      margin-right: 10px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .rules-degree-list li:hover .copy-indicator {
-      opacity: 1;
-    }
-    
-    .rules-degree-list li:last-child {
-      border-bottom: none;
-    }
-
-    /* أنيميشن عامة */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* نوتيفيكيشن للنسخ */
-    .copy-notification {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 139, 0, 0.9);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      z-index: 10000;
-      animation: slideDown 0.3s ease, fadeOut 0.3s ease 1.7s;
-      display: none;
-    }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-    
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-      }
-    }
-    
-    /* جدول الدرجات والمخالفات */
-    .grades-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(30, 30, 30, 0.9);
-      border-radius: 14px;
-      margin-top: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      animation: fadeInUp 0.8s ease;
-      overflow: auto;
-      border: 1px solid rgba(255, 77, 77, 0.2);
-    }
-    
-    .grades-table th {
-      background: linear-gradient(135deg, 
-        rgba(139, 0, 0, 0.95), 
-        rgba(106, 0, 0, 0.9));
-      color: white;
-      font-weight: bold;
-      padding: 15px;
-      border: 1px solid rgba(68, 68, 68, 0.5);
-      white-space: nowrap;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    
-    .grades-table td {
-      padding: 12px;
-      text-align: center;
-      border: 1px solid rgba(68, 68, 68, 0.3);
-      height: 50px;
-      transition: all 0.3s ease;
-      color: white;
-    }
-    
-    .grades-table th:first-child,
-    .grades-table td:first-child {
-      position: sticky;
-      right: 0;
-      background: rgba(40, 40, 40, 0.95);
-      z-index: 5;
-      min-width: 150px;
-      font-weight: bold;
-      color: var(--light-red);
-      border-right: 2px solid rgba(255, 77, 77, 0.3);
-    }
-    
-    .grade-badge {
-      display: inline-block;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: bold;
-      margin: 2px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-      min-width: 120px;
-      text-align: center;
-      color: white;
-    }
-    
-    .grade-1 {
-      background: linear-gradient(135deg, #8b0000, #b30000);
-      border: 1px solid #ff4d4d;
-    }
-    
-    .grade-2 {
-      background: linear-gradient(135deg, #b87333, #e69933);
-      border: 1px solid #ffcc66;
-    }
-    
-    .grade-3 {
-      background: linear-gradient(135deg, #cc9900, #ffcc00);
-      border: 1px solid #ffff66;
-    }
-    
-    .grade-4 {
-      background: linear-gradient(135deg, #00994c, #00cc66);
-      border: 1px solid #66ff99;
-    }
-    
-    .grade-5 {
-      background: linear-gradient(135deg, #0066cc, #0099ff);
-      border: 1px solid #66ccff;
-    }
-    
-    .grade-6 {
-      background: linear-gradient(135deg, #663399, #9966cc);
-      border: 1px solid #cc99ff;
-    }
-    
-    .grade-7 {
-      background: linear-gradient(135deg, #99004c, #cc0066);
-      border: 1px solid #ff66cc;
-    }
     
     /* تحسينات للشاشات الصغيرة */
     @media (max-width: 768px) {
@@ -1300,10 +873,6 @@
         max-height: 600px;
       }
       
-      .rules-container {
-        padding: 15px;
-      }
-      
       .time-cell {
         flex-wrap: wrap;
         gap: 5px;
@@ -1314,10 +883,6 @@
       .time-cell button {
         width: 100%;
         margin-bottom: 5px;
-      }
-      
-      .grades-table {
-        font-size: 12px;
       }
       
       header h1 {
@@ -1349,41 +914,18 @@
         padding: 15px 30px;
       }
       
-      .selection-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .selection-card {
-        width: 90%;
-        max-width: 300px;
-      }
-      
-      .command-row {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-      }
-      
-      .command-title, .command-name {
-        font-size: 16px;
-        min-width: auto;
-        width: 100%;
-        text-align: center;
-      }
-      
-      .command-name {
-        padding: 6px 12px;
-        margin-right: 0;
+      h2.section-title {
+        font-size: 22px;
       }
     }
     
-    /* تأثير تحميل الصفحة */
-    .container > * {
-      animation: pageLoad 0.8s ease-out;
+    /* أنيميشن عامة */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     
-    @keyframes pageLoad {
+    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -1401,71 +943,27 @@
 
 <!-- القائمة الرئيسية -->
 <nav class="main-nav">
-  <button class="nav-button" onclick="showPage('calls')">📋 سجل الاستدعاءات</button>
-  <button class="nav-button" onclick="showPage('rules')">📖 بنود المخالفات</button>
-  <button class="nav-button" onclick="showPage('grades')">📊 جدول العقوبات</button>
+  <button class="nav-button active" onclick="showPage('calls')">📋 سجل الاستدعاءات</button>
 </nav>
 
 <div class="container">
-  <!-- زر الرجوع (يظهر تلقائياً عند الحاجة) -->
-  <button class="back-button" id="backButton" onclick="showHomePage()" style="display: none;">العودة للرئيسية</button>
-  
   <!-- المحتوى الرئيسي -->
   <div id="mainContent">
     <!-- الصفحة الرئيسية -->
     <div id="homePage" class="page-content">
       <div class="home-page">
-        <h1 class="welcome-title">أهلاً بك في مستند الشرطة العسكرية</h1>
+        <h1 class="welcome-title">أهلاً بك في سجل الاستدعاءات</h1>
         <div class="welcome-subtitle">
-          <div class="command-structure">
-            <div class="command-row">
-              <span class="command-title">بقيادة:</span>
-              <span class="command-name">أيمن القحطاني</span>
-            </div>
-            <div class="command-row">
-              <span class="command-title">نائب القائد:</span>
-              <span class="command-name">مشعل الضبعاني</span>
-            </div>
-            <div class="command-row">
-              <span class="command-title">مستشار القائد:</span>
-              <span class="command-name">عزيز الضويحي</span>
-            </div>
-          </div>
+          نظام إدارة استدعاءات العسكريين وتتبع أوقاتها والتحكم في سبب الحكم
         </div>
-        <button class="start-button" onclick="showSelectionMenu()">ابدأ</button>
-        
-        <!-- قائمة الاختيار (تظهر بعد الضغط على بدأ) -->
-        <div class="selection-menu" id="selectionMenu">
-          <h2 class="selection-title">اختر القسم الذي تريد الدخول إليه:</h2>
-          <div class="selection-cards">
-            <div class="selection-card" onclick="showPage('calls')">
-              <div class="card-icon">📋</div>
-              <div class="card-title">الاستدعاءات</div>
-              <div class="card-desc">إدارة استدعاءات العسكريين وتتبع أوقاتها والتحكم في سبب الحكم</div>
-            </div>
-            <div class="selection-card" onclick="showPage('rules')">
-              <div class="card-icon">📖</div>
-              <div class="card-title">البنود</div>
-              <div class="card-desc">عرض ونسخ بنود الحكم المخالفة حسب الدرجات والبحث السريع</div>
-            </div>
-            <div class="selection-card" onclick="showPage('grades')">
-              <div class="card-icon">📊</div>
-              <div class="card-title">الدرجات والمخالفات</div>
-              <div class="card-desc">جدول المخالفات والعقوبات حسب الرتب والدرجات المختلفة</div>
-            </div>
-          </div>
-        </div>
+        <button class="start-button" onclick="showPage('calls')">ابدأ</button>
       </div>
     </div>
     
-    <!-- محتوى الأقسام الأخرى -->
+    <!-- صفحة الاستدعاءات -->
     <div id="callsPage" class="page-content" style="display: none;"></div>
-    <div id="rulesPage" class="page-content" style="display: none;"></div>
-    <div id="gradesPage" class="page-content" style="display: none;"></div>
   </div>
 </div>
-
-<div class="copy-notification" id="copyNotification">تم نسخ البند بنجاح!</div>
 
 <script>
 // إنشاء الجسيمات المتحركة
@@ -1498,70 +996,15 @@ let calls = JSON.parse(localStorage.getItem('calls') || '[]');
 let timers = {};
 let activeDropdown = null;
 
-// دالة إظهار قائمة الاختيار
-function showSelectionMenu() {
-  const startButton = document.querySelector('.start-button');
-  const selectionMenu = document.getElementById('selectionMenu');
-  
-  // إخفاء زر "ابدأ"
-  startButton.style.display = 'none';
-  
-  // إظهار قائمة الاختيار
-  selectionMenu.style.display = 'block';
-}
-
-// دالة العودة للصفحة الرئيسية
-function showHomePage() {
-  // إظهار زر الرجوع
-  const backButton = document.getElementById('backButton');
-  backButton.style.display = 'none';
-  
-  // إخفاء جميع الصفحات
-  document.querySelectorAll('.page-content').forEach(page => {
-    page.style.display = 'none';
-  });
-  
-  // إظهار الصفحة الرئيسية
-  const homePage = document.getElementById('homePage');
-  homePage.style.display = 'block';
-  
-  // إعادة إظهار زر "ابدأ" وإخفاء قائمة الاختيار
-  const startButton = document.querySelector('.start-button');
-  const selectionMenu = document.getElementById('selectionMenu');
-  
-  startButton.style.display = 'block';
-  selectionMenu.style.display = 'none';
-  
-  // تحديث حالة القائمة
-  document.querySelectorAll('.nav-button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  
-  // حفظ الصفحة الحالية
-  currentPage = 'home';
-}
-
 // دالة إظهار الصفحة
 function showPage(pageId) {
-  // إظهار زر الرجوع
-  const backButton = document.getElementById('backButton');
-  backButton.style.display = 'inline-flex';
-  
   // تحديث القائمة النشطة
   document.querySelectorAll('.nav-button').forEach(btn => {
     btn.classList.remove('active');
   });
   
   // تحديث الزر النشط في القائمة
-  const pageButtons = {
-    'calls': document.querySelector('.nav-button:nth-child(1)'),
-    'rules': document.querySelector('.nav-button:nth-child(2)'),
-    'grades': document.querySelector('.nav-button:nth-child(3)')
-  };
-  
-  if (pageButtons[pageId]) {
-    pageButtons[pageId].classList.add('active');
-  }
+  document.querySelector('.nav-button').classList.add('active');
   
   // إخفاء جميع الصفحات
   document.querySelectorAll('.page-content').forEach(page => {
@@ -1594,7 +1037,7 @@ function loadPageContent(pageId) {
   switch(pageId) {
     case 'calls':
       targetPage.innerHTML = `
-        <h2 class='section-title'>الاستدعاءات</h2>
+        <h2 class='section-title'>سجل الاستدعاءات</h2>
         <table>
           <thead>
             <tr>
@@ -1611,81 +1054,7 @@ function loadPageContent(pageId) {
         </table>
         <button class='add-btn' onclick='addRow()'>+ إضافة عسكري</button>`;
       break;
-      
-    case 'rules':
-      targetPage.innerHTML = `
-        <h2 class='section-title'>البنود</h2>
-        <div class="rules-container">
-          <div class="rules-search-section">
-            <div class="rules-search-title">البحث في البنود</div>
-            <input class='rules-search-input' placeholder='اكتب للبحث في البنود...' oninput='searchRules(this.value)'>
-          </div>
-          <div class="rules-content" id='rules'></div>
-        </div>`;
-      
-      // تحميل البنود
-      const rulesDiv = document.getElementById('rules');
-      let rulesHTML = '';
-      
-      Object.entries(rulesByDegree).forEach(([degree, rules]) => {
-        rulesHTML += `
-          <div class="rules-degree-section">
-            <h3 class="degree-title">${degree}</h3>
-            <ul class="rules-degree-list">
-              ${rules.map(rule => `
-                <li onclick="copyToClipboard('${rule}')">
-                  ${rule}
-                  <span class="copy-indicator">انقر للنسخ</span>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        `;
-      });
-      
-      rulesDiv.innerHTML = rulesHTML;
-      break;
-      
-    case 'grades':
-      targetPage.innerHTML = `
-        <h2 class='section-title'>الدرجات والمخالفات</h2>
-        <div class="rules-container">
-          <div style="margin-bottom: 20px; text-align: center;">
-            <div class="rules-search-title">جدول المخالفات حسب الرتب والدرجات</div>
-          </div>
-          <table class="grades-table" id="grades-table"></table>
-        </div>`;
-      
-      renderGradesTable();
-      break;
   }
-}
-
-function showCopyNotification() {
-  const notification = document.getElementById('copyNotification');
-  notification.style.display = 'block';
-  setTimeout(() => {
-    notification.style.display = 'none';
-  }, 2000);
-}
-
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    showCopyNotification();
-  }).catch(err => {
-    console.error('فشل النسخ: ', err);
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      showCopyNotification();
-    } catch (err) {
-      console.error('فشل النسخ بالطريقة البديلة: ', err);
-    }
-    document.body.removeChild(textArea);
-  });
 }
 
 function saveCalls() {
@@ -1799,11 +1168,6 @@ function confirmTime(i) {
   
   const [year, month, day] = dateValue.split('-').map(Number);
   const callTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
-  
-  const now = new Date();
-  
-  // إزالة التحقق من الوقت في الماضي
-  // يمكن للمستخدم إضافة وقت في الماضي إذا كان قد نسي تسجيله سابقاً
   
   calls[i].end = callTime.getTime();
   saveCalls();
@@ -2117,231 +1481,10 @@ function closeAllDropdowns() {
   document.querySelectorAll('.rule-select').forEach(s => s.classList.remove('open'));
 }
 
-function searchRules(v) {
-  const searchTerm = v.toLowerCase();
-  const rulesDiv = document.getElementById('rules');
-  if (!rulesDiv) return;
-  
-  const degreeSections = rulesDiv.querySelectorAll('.rules-degree-section');
-  
-  degreeSections.forEach(section => {
-    const items = section.querySelectorAll('li');
-    let hasVisibleItems = false;
-    
-    items.forEach(item => {
-      if (item.textContent.toLowerCase().includes(searchTerm)) {
-        item.style.display = 'flex';
-        hasVisibleItems = true;
-      } else {
-        item.style.display = 'none';
-      }
-    });
-    
-    section.style.display = hasVisibleItems || !searchTerm ? 'block' : 'none';
-  });
-}
-
-// بيانات الدرجات
-const gradesData = {
-  ranks: [
-    'جندي',
-    'جندي أول',
-    'عريف + وكيل رقيب',
-    'رقيب',
-    'رقيب أول',
-    'رئيس رقباء',
-    'ملازم',
-    'ملازم أول',
-    'نقيب',
-    'رائد',
-    'مقدم',
-    'عقيد',
-    'عميد',
-    'لواء'
-  ],
-  degrees: [
-    {
-      name: 'الدرجة الأولى',
-      punishments: [
-        'شفهي أول + 100 الف',
-        'شفهي أول + 150 الف',
-        'شفهي أول + 250 الف',
-        'شفهي أول + 250 الف',
-        'شفهي أول + 300 الف',
-        'شفوي اول + 400 الف',
-        'شفهي ثاني + 500 الف',
-        'شفهي أخير + 500 الف',
-        'شفهي أخير + 750 ألف',
-        'وظيفي اول + 750 الف',
-        'وظيفي اول + 750 الف',
-        'وظيفي اول + 750 الف',
-        'وظيفي اول + 750 الف',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة الثانية',
-      punishments: [
-        'شفهي ثاني + 200 الف',
-        'شفهي ثاني + 200 الف',
-        'شفهي ثاني + 300 الف',
-        'شفهي ثاني + 350 الف',
-        'شفهي ثاني + 400 الف',
-        'شفهي أخير + 500 الف',
-        'شفهي اخير + 550 الف',
-        'وظيفي اول + 700 الف',
-        'وظيفي اول + 900 الف',
-        'وظيفي ثاني + 900 الف',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة الثالثة',
-      punishments: [
-        'شفهي اخير + 300 الف',
-        'شفهي اخير + 300 الف',
-        'شفهي اخير + 350 الف',
-        'شفهي اخير + 350 الف',
-        'انذار وظيفي اول + 400 الف',
-        'وظيفي اول + 700 الف',
-        'وظيفي اول + 800 ألف',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'وظيفي ثاني + مليون',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة الرابعة',
-      punishments: [
-        'فصل من الخدمة',
-        'وظيفي اول',
-        'وظيفي اول + 400 الف',
-        'وظيفي اول + 400 الف',
-        'وظيفي ثاني + 500 ألف',
-        'وظيفي ثاني + 500 ألف',
-        'وظيفي ثاني + 800 ألف',
-        'وظيفي أخير + مليون',
-        'وظيفي أخير + مليون',
-        'وظيفي أخير + مليون',
-        'وظيفي أخير + مليون',
-        'وظيفي أخير + مليون',
-        'وظيفي أخير + مليون',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة الخامسة',
-      punishments: [
-        'فصل من الخدمة',
-        'فصل من الخدمة',
-        'كسر رتبة + 500 الف',
-        'كسر رتبة + 500 الف',
-        'كسر رتبة + 500 الف',
-        'كسر رتبة + 500 الف',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'كسر رتبة + مليون',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة السادسة',
-      punishments: [
-        'فصل من الخدمة',
-        'فصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    },
-    {
-      name: 'الدرجة السابعة',
-      punishments: [
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'تقديرية تصل الى الفصل من الخدمة',
-        'المحاسبة من قبل القيادة العليا'
-      ]
-    }
-  ]
-};
-
-function renderGradesTable() {
-  const table = document.getElementById('grades-table');
-  if (!table) return;
-  
-  let html = `
-    <thead>
-      <tr>
-        <th>الرتبة / الدرجة</th>`;
-  
-  gradesData.ranks.forEach(rank => {
-    html += `<th>${rank}</th>`;
-  });
-  
-  html += `</tr></thead><tbody>`;
-  
-  gradesData.degrees.forEach((degree, degreeIndex) => {
-    const degreeClass = `degree-${degreeIndex + 1}`;
-    html += `<tr class="${degreeClass}">`;
-    html += `<td><div class="grade-badge grade-${degreeIndex + 1}">${degree.name}</div></td>`;
-    
-    degree.punishments.forEach((punishment, rankIndex) => {
-      let cellContent = punishment;
-      let cellClass = '';
-      
-      if (punishment.includes('فصل من الخدمة')) {
-        cellClass = 'firing';
-      } else if (punishment.includes('تقديرية')) {
-        cellClass = 'general-punishment';
-      } else if (punishment.includes('المحاسبة من قبل القيادة العليا')) {
-        cellClass = 'liwaa-cell';
-      }
-      
-      html += `<td class="${cellClass}">${cellContent}</td>`;
-    });
-    
-    html += `</tr>`;
-  });
-  
-  html += `</tbody>`;
-  table.innerHTML = html;
-}
-
 // تهيئة الصفحة عند التحميل
 window.onload = function() {
   // عرض الصفحة الرئيسية افتراضياً
-  showHomePage();
+  showPage('home');
 };
 </script>
 </body>
