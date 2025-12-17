@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الشرطة العسكرية - سجل الاستدعاءات</title>
+  <style>
+    :root {
+      --primary-red: #8b0000;
+      --light-red: #ff4d4d;
+      --dark-bg: #121212;
+      --medium-bg: #1e1e1e;
+      --light-bg: #2a2a2a;
+      --border-color: #444;
+      --text-light: #fff;
+      --text-gold: #ffd966;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #0a0a0a;
+      color: var(--text-light);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    /* خلفية متحركة متطورة - موجات رمادية */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, #1a1a1a 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, #222222 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, #1c1c1c 0%, transparent 50%),
+        linear-gradient(45deg, #151515 25%, transparent 25%),
+        linear-gradient(-45deg, #151515 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #151515 75%),
+        linear-gradient(-45deg, transparent 75%, #151515 75%);
+      background-size: 100px 100px;
+      background-position: 0 0, 0 0, 0 0, 0 0, 0 50px, 50px -50px, -50px 0px;
+      z-index: -3;
+      animation: waveMove 20s linear infinite;
+      opacity: 0.4;
+    }
+    
+    @keyframes waveMove {
+      0% {
+        background-position: 0 0, 0 0, 0 0, 0 0, 0 50px, 50px -50px, -50px 0px;
+      }
+      100% {
+        background-position: 100px 100px, 100px 100px, 100px 100px, 100px 100px, 100px 150px, 150px 50px, 50px 100px;
+      }
+    }
+    
+    /* تأثير شبكة متحركة */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(90deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(50, 50, 50, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -2;
+      animation: gridMove 40s linear infinite;
+      opacity: 0.3;
+    }
+    
+    @keyframes gridMove {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      100% {
+        transform: translateX(30px) translateY(30px);
+      }
+    }
+    
+    /* تأثير جسيمات خفيفة */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(139, 0, 0, 0.05);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0.3;
+      }
+      25% {
+        transform: translateY(-100px) translateX(50px) rotate(90deg);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-50px) translateX(100px) rotate(180deg);
+        opacity: 0.7;
+      }
+      75% {
+        transform: translateY(50px) translateX(50px) rotate(270deg);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(0) translateX(0) rotate(360deg);
+        opacity: 0.3;
+      }
+    }
+    
+    header {
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.95), 
+        rgba(26, 26, 26, 0.98),
+        rgba(139, 0, 0, 0.9));
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid rgba(255, 77, 77, 0.4);
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 77, 77, 0.2) 50%, 
+        transparent 70%);
+      animation: shine 4s infinite;
+      z-index: 1;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%); }
+      100% { transform: translateX(100%) translateY(100%); }
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9),
+                   0 0 25px rgba(139, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
+      letter-spacing: 1px;
+      color: white;
+      font-weight: bold;
+    }
+    
+    /* القائمة الرئيسية */
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(30, 30, 30, 0.95);
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-button {
+      margin: 0 10px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.85), 
+        rgba(179, 0, 0, 0.8));
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 77, 77, 0.25);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-width: 120px;
+      text-align: center;
+    }
+    
+    .nav-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+      z-index: -1;
+    }
+    
+    .nav-button:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .nav-button:hover {
+      background: linear-gradient(135deg, 
+        rgba(179, 0, 0, 0.9), 
+        rgba(255, 77, 77, 0.85));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 0, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 77, 77, 0.4);
+    }
+    
+    .nav-button.active {
+      background: linear-gradient(135deg, 
+        rgba(255, 77, 77, 0.9), 
+        rgba(179, 0, 0, 0.85));
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 77, 77, 0.5);
+    }
+    
+    .nav-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 20%;
+      width: 60%;
+      height: 3px;
+      background: var(--light-red);
+      border-radius: 2px;
+      animation: pulse 2s infinite;
+    }
+    
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 30px 25px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* صفحة الرئيسية الجديدة */
+    .home-page {
+      animation: fadeInUp 0.8s ease;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .welcome-title {
+      font-size: 42px;
+      color: white;
+      margin-bottom: 30px;
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+      animation: fadeIn 1s ease;
+      line-height: 1.4;
+    }
+    
+    .welcome-subtitle {
+      font-size: 22px;
+      color: var(--text-gold);
+      margin-bottom: 40px;
+      animation: fadeIn 1.2s ease;
+      line-height: 1.8;
+    }
+
+    .start-button {
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.95), 
+        rgba(179, 0, 0, 0.9));
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 20px 50px;
+      border-radius: 15px;
+      border: 2px solid rgba(255, 77, 77, 0.4);
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                  0 0 40px rgba(255, 77, 77, 0.3);
+      transition: all 0.4s ease;
+      margin-top: 40px;
+      animation: pulseBig 2s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .start-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(139, 0, 0, 0.6),
+                  0 0 60px rgba(255, 77, 77, 0.5);
+      background: linear-gradient(135deg, 
+        rgba(179, 0, 0, 0.95), 
+        rgba(255, 77, 77, 0.9));
+      border-color: rgba(255, 77, 77, 0.6);
+    }
+    
+    .start-button:active {
+      transform: translateY(-2px) scale(1.02);
+    }
+    
+    @keyframes pulseBig {
+      0% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                    0 0 40px rgba(255, 77, 77, 0.3);
+      }
+      50% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                    0 0 60px rgba(255, 77, 77, 0.5);
+      }
+      100% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7),
+                    0 0 40px rgba(255, 77, 77, 0.3);
+      }
+    }
+    
+    h2.section-title {
+      margin: 35px 0 20px;
+      font-size: 28px;
+      color: white;
+      display: inline-block;
+      padding-bottom: 8px;
+      animation: fadeInUp 0.8s ease;
+      position: relative;
+      font-weight: bold;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    
+    h2.section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--light-red);
+      border-radius: 2px;
+      animation: linePulse 2s ease-in-out infinite;
+      transform-origin: right;
+    }
+    
+    @keyframes linePulse {
+      0%, 100% { 
+        transform: scaleX(0.8);
+        opacity: 0.8;
+      }
+      50% { 
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(30, 30, 30, 0.9);
+      border-radius: 14px;
+      margin-top: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      animation: fadeInUp 0.8s ease;
+      overflow: hidden;
+      border: 1px solid rgba(255, 77, 77, 0.2);
+    }
+    
+    th, td {
+      padding: 12px;
+      text-align: center;
+      vertical-align: middle;
+      height: 60px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    
+    th {
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.95), 
+        rgba(106, 0, 0, 0.9));
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      border-bottom: 2px solid rgba(68, 68, 68, 0.5);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    }
+    
+    tbody tr {
+      border-bottom: 1px solid rgba(68, 68, 68, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    tbody tr:hover {
+      background: rgba(255, 77, 77, 0.08);
+    }
+    
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+    
+    td {
+      border-left: none;
+      border-right: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    td::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.03) 50%, 
+        transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    
+    td:hover::before {
+      transform: translateX(100%);
+    }
+
+    input, select {
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: rgba(30, 30, 30, 0.9);
+      color: white;
+      border: 1px solid rgba(68, 68, 68, 0.6);
+      text-align: center;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      height: 38px;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--light-red);
+      box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2),
+                  inset 0 0 10px rgba(255, 77, 77, 0.1);
+    }
+    
+    select {
+      appearance: none;
+      padding-left: 30px;
+      background-image: linear-gradient(45deg, transparent 50%, var(--light-red) 50%), 
+                        linear-gradient(135deg, var(--light-red) 50%, transparent 50%);
+      background-position: 14px 50%, 20px 50%;
+      background-size: 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    input[type="date"] {
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: rgba(30, 30, 30, 0.9);
+      color: white;
+      border: 1px solid rgba(68, 68, 68, 0.6);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 140px;
+      box-sizing: border-box;
+    }
+    
+    input[type="date"]:focus {
+      outline: none;
+      border-color: var(--light-red);
+      box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2);
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
+    }
+
+    .add-btn {
+      margin-top: 25px;
+      background: linear-gradient(135deg, 
+        rgba(179, 0, 0, 0.9), 
+        rgba(255, 77, 77, 0.85));
+      padding: 14px 28px;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 77, 77, 0.3);
+      cursor: pointer;
+      color: white;
+      transition: all 0.4s ease;
+      animation: fadeIn 0.8s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 77, 77, 0.4);
+      background: linear-gradient(135deg, 
+        rgba(255, 77, 77, 0.9), 
+        rgba(179, 0, 0, 0.85));
+      border-color: rgba(255, 77, 77, 0.5);
+    }
+
+    .timer {
+      font-weight: bold;
+      color: var(--text-gold);
+      font-size: 16px;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 10px rgba(255, 217, 102, 0.5);
+    }
+    
+    @keyframes pulse {
+      0% { 
+        opacity: 1; 
+        text-shadow: 0 0 5px rgba(255, 217, 102, 0.5);
+      }
+      50% { 
+        opacity: 0.8; 
+        text-shadow: 0 0 15px rgba(255, 217, 102, 0.8);
+      }
+      100% { 
+        opacity: 1; 
+        text-shadow: 0 0 5px rgba(255, 217, 102, 0.5);
+      }
+    }
+    
+    .time-cell, .action-cell {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .time-cell {
+      flex-wrap: nowrap;
+      min-height: 60px;
+    }
+    
+    .time-cell input,
+    .time-cell select,
+    .time-cell button {
+      height: 38px;
+      flex-shrink: 0;
+    }
+    
+    .time-cell input {
+      width: 100px;
+      min-width: 100px;
+    }
+    
+    .time-cell select {
+      width: 90px;
+      min-width: 90px;
+    }
+    
+    .time-cell button {
+      width: 70px;
+      min-width: 70px;
+      padding: 6px 12px;
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.8), 
+        rgba(179, 0, 0, 0.7));
+      color: white;
+      border: 1px solid rgba(255, 77, 77, 0.2);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    
+    .time-cell button:hover {
+      background: linear-gradient(135deg, 
+        rgba(179, 0, 0, 0.9), 
+        rgba(255, 77, 77, 0.8));
+      transform: translateY(-1px);
+      border-color: rgba(255, 77, 77, 0.4);
+      box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+    }
+    
+    .action-cell button {
+      padding: 6px 12px;
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.8), 
+        rgba(179, 0, 0, 0.7));
+      color: white;
+      border: 1px solid rgba(255, 77, 77, 0.2);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      height: 38px;
+    }
+    
+    .action-cell button:hover {
+      background: linear-gradient(135deg, 
+        rgba(179, 0, 0, 0.9), 
+        rgba(255, 77, 77, 0.8));
+      transform: translateY(-1px);
+      border-color: rgba(255, 77, 77, 0.4);
+      box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+    }
+
+    /* تنسيق قوائم البنود - إصلاح المشكلة */
+    .rule-select-wrapper {
+      position: relative;
+      width: 100%;
+      height: 40px;
+    }
+    
+    .rule-select {
+      width: 100%;
+      height: 100%;
+      padding: 8px 35px 8px 12px;
+      background: rgba(30, 30, 30, 0.9);
+      color: white;
+      border: 1px solid rgba(68, 68, 68, 0.6);
+      border-radius: 7px;
+      font-size: 14px;
+      text-align: right;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      position: relative;
+    }
+    
+    .rule-select:hover {
+      border-color: var(--light-red);
+      background: rgba(40, 40, 40, 0.95);
+      box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
+    }
+    
+    .rule-select::after {
+      content: '▼';
+      position: absolute;
+      right: 12px;
+      font-size: 12px;
+      color: var(--light-red);
+      transition: transform 0.3s ease;
+    }
+    
+    .rule-select.open::after {
+      transform: rotate(180deg);
+    }
+    
+    .dropdown-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .dropdown-overlay.show {
+      display: block;
+    }
+    
+    .rule-dropdown {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 500px;
+      max-width: 90%;
+      height: 550px;
+      max-height: 80vh;
+      background: rgba(30, 30, 30, 0.98);
+      border: 1px solid var(--light-red);
+      border-radius: 12px;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      animation: dropdownAppear 0.4s ease forwards;
+      backdrop-filter: blur(10px);
+    }
+    
+    @keyframes dropdownAppear {
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+    
+    .rule-dropdown.show {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dropdown-header {
+      padding: 15px 20px;
+      background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.95), 
+        rgba(106, 0, 0, 0.9));
+      border-bottom: 1px solid rgba(255, 77, 77, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    .dropdown-title {
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+    
+    .close-dropdown {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    
+    .close-dropdown:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .rule-search-box {
+      padding: 15px;
+      background: rgba(40, 40, 40, 0.9);
+      border-bottom: 1px solid rgba(68, 68, 68, 0.6);
+      flex-shrink: 0;
+    }
+    
+    .rule-search-input {
+      width: 100%;
+      padding: 10px 15px;
+      background: rgba(20, 20, 20, 0.9);
+      color: white;
+      border: 1px solid rgba(68, 68, 68, 0.6);
+      border-radius: 6px;
+      text-align: right;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .rule-search-input:focus {
+      outline: none;
+      border-color: var(--light-red);
+      box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2);
+    }
+    
+    .rule-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      background: rgba(25, 25, 25, 0.9);
+    }
+    
+    .rule-option-group {
+      padding: 0;
+      margin: 0;
+    }
+    
+    .rule-group-header {
+      padding: 12px 15px;
+      background: rgba(139, 0, 0, 0.3);
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+    
+    .rule-group-header:hover {
+      background: rgba(139, 0, 0, 0.4);
+    }
+    
+    .rule-group-items {
+      padding: 0;
+      background: rgba(35, 35, 35, 0.9);
+    }
+    
+    .rule-option-item {
+      padding: 10px 20px;
+      cursor: pointer;
+      text-align: right;
+      border-bottom: 1px solid rgba(68, 68, 68, 0.3);
+      font-size: 13px;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    
+    .rule-option-item:hover {
+      background: rgba(139, 0, 0, 0.2);
+      padding-right: 25px;
+    }
+    
+    .rule-option-item.selected {
+      background: linear-gradient(90deg, 
+        rgba(139, 0, 0, 0.4), 
+        rgba(139, 0, 0, 0.2));
+      border-right: 3px solid var(--light-red);
+    }
+    
+    .no-results {
+      padding: 30px 20px;
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
+    
+    /* تحسينات للشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .rule-dropdown {
+        width: 95%;
+        height: 80vh;
+        max-height: 600px;
+      }
+      
+      .time-cell {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .time-cell input,
+      .time-cell select,
+      .time-cell button {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+      
+      header h1 {
+        font-size: 24px;
+      }
+      
+      .nav-button {
+        padding: 10px 15px;
+        font-size: 14px;
+        margin: 5px;
+        min-width: 100px;
+      }
+      
+      .main-nav {
+        flex-wrap: wrap;
+        padding: 10px;
+      }
+      
+      .welcome-title {
+        font-size: 28px;
+      }
+      
+      .welcome-subtitle {
+        font-size: 16px;
+      }
+      
+      .start-button {
+        font-size: 18px;
+        padding: 15px 30px;
+      }
+      
+      h2.section-title {
+        font-size: 22px;
+      }
+    }
+    
+    /* أنيميشن عامة */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<header><h1>الشرطة العسكرية</h1></header>
+
+<!-- القائمة الرئيسية -->
+<nav class="main-nav">
+  <button class="nav-button active" onclick="showPage('calls')">📋 سجل الاستدعاءات</button>
+</nav>
+
+<div class="container">
+  <!-- المحتوى الرئيسي -->
+  <div id="mainContent">
+    <!-- الصفحة الرئيسية -->
+    <div id="homePage" class="page-content">
+      <div class="home-page">
+        <h1 class="welcome-title">أهلاً بك في سجل الاستدعاءات</h1>
+        <div class="welcome-subtitle">
+          نظام إدارة استدعاءات العسكريين وتتبع أوقاتها والتحكم في سبب الحكم
+        </div>
+        <button class="start-button" onclick="showPage('calls')">ابدأ</button>
+      </div>
+    </div>
+    
+    <!-- صفحة الاستدعاءات -->
+    <div id="callsPage" class="page-content" style="display: none;"></div>
+  </div>
+</div>
+
+<script>
+// إنشاء الجسيمات المتحركة
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 30;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    const size = Math.random() * 60 + 20;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDelay = `${Math.random() * 5}s`;
+    particle.style.opacity = Math.random() * 0.1 + 0.05;
+    
+    particlesContainer.appendChild(particle);
+  }
+}
+
+createParticles();
+
+// متغيرات التطبيق
+let currentPage = 'home';
+const DAY = 86400000;
+let calls = JSON.parse(localStorage.getItem('calls') || '[]');
+let timers = {};
+let activeDropdown = null;
+
+// دالة إظهار الصفحة
+function showPage(pageId) {
+  // تحديث القائمة النشطة
+  document.querySelectorAll('.nav-button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // تحديث الزر النشط في القائمة
+  document.querySelector('.nav-button').classList.add('active');
+  
+  // إخفاء جميع الصفحات
+  document.querySelectorAll('.page-content').forEach(page => {
+    page.style.display = 'none';
+  });
+  
+  // إظهار الصفحة المحددة
+  const targetPage = document.getElementById(pageId + 'Page');
+  targetPage.style.display = 'block';
+  
+  // تحميل المحتوى إذا كان فارغاً
+  if (targetPage.innerHTML.trim() === '' || targetPage.getAttribute('data-loaded') !== 'true') {
+    loadPageContent(pageId);
+    targetPage.setAttribute('data-loaded', 'true');
+  }
+  
+  // حفظ الصفحة الحالية
+  currentPage = pageId;
+  
+  // إذا كانت صفحة الاستدعاءات، نعيد تحميل الجدول
+  if (pageId === 'calls') {
+    renderRows();
+  }
+}
+
+// دالة تحميل محتوى الصفحة
+function loadPageContent(pageId) {
+  const targetPage = document.getElementById(pageId + 'Page');
+  
+  switch(pageId) {
+    case 'calls':
+      targetPage.innerHTML = `
+        <h2 class='section-title'>سجل الاستدعاءات</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>الاسم</th>
+              <th>سبب الحكم</th>
+              <th>تاريخ الاستدعاء</th>
+              <th>وقت الاستدعاء</th>
+              <th>المتبقي</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id='tbody'></tbody>
+        </table>
+        <button class='add-btn' onclick='addRow()'>+ إضافة عسكري</button>`;
+      break;
+  }
+}
+
+function saveCalls() {
+  localStorage.setItem('calls', JSON.stringify(calls));
+}
+
+function addRow() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayStr = `${year}-${month}-${day}`;
+  
+  calls.push({ 
+    id: '', 
+    name: '', 
+    rule: '', 
+    callDate: todayStr,
+    end: null 
+  });
+  saveCalls();
+  renderRows();
+}
+
+function renderRows() {
+  const tb = document.getElementById('tbody');
+  if (!tb) return;
+  
+  tb.innerHTML = '';
+  
+  calls.forEach((c, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input value='${c.id}' oninput="calls[${i}].id=this.value;saveCalls()"></td>
+      <td><input value='${c.name}' oninput="calls[${i}].name=this.value;saveCalls()"></td>
+      <td id="rule-cell-${i}"></td>
+      <td><input type='date' value='${c.callDate || ''}' oninput="calls[${i}].callDate=this.value;saveCalls()" style="width: 140px;"></td>
+      <td class='time-cell'>
+        <input placeholder='11 أو 11:40' id='time-input-${i}'>
+        <select id='period-select-${i}'>
+          <option>صباحي</option>
+          <option>مسائي</option>
+        </select>
+        <button onclick='confirmTime(${i})'>تأكيد</button>
+      </td>
+      <td class='timer' id='timer-${i}'>--</td>
+      <td class='action-cell'>
+        <button onclick='resetTime(${i})'>إعادة ضبط</button>
+        <button onclick='del(${i})'>حذف</button>
+      </td>
+    `;
+    tb.appendChild(tr);
+    
+    const ruleCell = document.getElementById(`rule-cell-${i}`);
+    const ruleSelect = createRuleSelect(c.rule, i);
+    ruleCell.appendChild(ruleSelect);
+    
+    if (c.end) startTimer(i, document.getElementById(`timer-${i}`));
+  });
+}
+
+function confirmTime(i) {
+  const timeInput = document.getElementById(`time-input-${i}`);
+  const periodSelect = document.getElementById(`period-select-${i}`);
+  const dateInput = document.querySelector(`#timer-${i}`).closest('tr').querySelector('input[type="date"]');
+  const timerCell = document.getElementById(`timer-${i}`);
+  
+  const timeValue = timeInput.value.trim();
+  const period = periodSelect.value;
+  const dateValue = dateInput.value;
+  
+  if (!timeValue) {
+    alert('الرجاء إدخال الوقت');
+    return;
+  }
+  
+  if (!dateValue) {
+    alert('الرجاء تحديد تاريخ الاستدعاء');
+    return;
+  }
+  
+  // تحسين قبول الوقت بطرق مختلفة: 11 أو 11:40
+  let hours, minutes = 0;
+  if (timeValue.includes(':')) {
+    const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+    if (!match) {
+      alert('الرجاء إدخال الوقت بالصيغة الصحيحة (مثال: 11 أو 11:40)');
+      return;
+    }
+    hours = parseInt(match[1]);
+    minutes = parseInt(match[2]);
+  } else {
+    // إذا أدخل فقط الساعات
+    hours = parseInt(timeValue);
+    if (isNaN(hours)) {
+      alert('الرجاء إدخال الوقت بالصيغة الصحيحة (مثال: 11 أو 11:40)');
+      return;
+    }
+  }
+  
+  if (period === 'مسائي' && hours < 12) {
+    hours += 12;
+  } else if (period === 'صباحي' && hours === 12) {
+    hours = 0;
+  }
+  
+  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+    alert('الوقت غير صحيح');
+    return;
+  }
+  
+  const [year, month, day] = dateValue.split('-').map(Number);
+  const callTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
+  
+  calls[i].end = callTime.getTime();
+  saveCalls();
+  
+  startTimer(i, timerCell);
+}
+
+function startTimer(i, cell) {
+  if (timers[i]) clearInterval(timers[i]);
+  
+  function update() {
+    const diff = calls[i].end - Date.now();
+    if (diff <= 0) {
+      cell.textContent = 'انتهى';
+      cell.style.color = '#ff4d4d';
+      clearInterval(timers[i]);
+      return;
+    }
+    
+    const hours = Math.floor(diff / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    
+    cell.textContent = `${hours}س ${minutes}د`;
+    cell.style.color = '#ffd966';
+  }
+  
+  update();
+  timers[i] = setInterval(update, 1000);
+}
+
+function resetTime(i) {
+  calls[i].end = null;
+  saveCalls();
+  if (timers[i]) {
+    clearInterval(timers[i]);
+    delete timers[i];
+  }
+  renderRows();
+}
+
+function del(i) {
+  if (confirm('هل أنت متأكد من حذف هذا الاستدعاء؟')) {
+    if (timers[i]) {
+      clearInterval(timers[i]);
+      delete timers[i];
+    }
+    calls.splice(i, 1);
+    saveCalls();
+    renderRows();
+  }
+}
+
+// بيانات البنود
+const rulesByDegree = {
+  'الدرجة الأولى': [
+    'استيقاف مروري او التصدي للمجرمين بشكل خاطئ 1-1',
+    'مخالفة قوانين نقاط التفتيش 1-2',
+    'إبقاء المجرم في الدورية والتوجه لحالات أخرى 1-3',
+    'مخالفة قوانين الميدان بشكل عام 1-4',
+    'مخالفة قوانين المصادرات بشكل كامل 1-5',
+    'عدم تسليم الممنوعات 1-6',
+    'عدم تغيير المسمى الميداني 1-7',
+    'مخالفه قوانين ( كود 7 ) 1-8',
+    'التفاعل مع برقية رسميه 1-10',
+    'مخالفة قوانين المشتركه 1-11',
+    'تكرار التنويهات بالموجة لاكثر من 3 مرات خلال 5 دقائق 1-12',
+    'الوقوف بمواقف ليست مخصصة لرتبه 1-13',
+    'عدم ربط الفايف ام بالدسكورد 1-14',
+    'عدم تغيير مسمى الفايف ام 1-15',
+    'عدم رفع نداء استغاثة 1-16'
+  ],
+  'الدرجة الثانية': [
+    'تخطي المراجع 2-1',
+    'دخول موجات غير معتمدة 2-2',
+    'عدم التجاوب , إهمال التوجيهات في الراديو 2-3',
+    'عدم الإلتزام بالعهدة العسكرية 2-4',
+    'سجن شخص (20 شهر) بدون اذن ضابط 2-5',
+    'عدم الاتزام بالمظهر العسكري 2-6',
+    'عدم الالتزام بالأنظمة المرورية 2-7',
+    'وضع حواجز او كشك بدون اذن 2-8',
+    'تكرير طلب رتبة عالية بلا مبرر 2-9',
+    'مخالفة قوانين تسجيل الدخول والخروج والبقاء في المركز 2-10',
+    'استخدام المنشن بشكل خاطئ 2-11',
+    'التأخر عن الاصطفاف 2-12',
+    'مخالفه قوانين السجلات الجنائيه 2-13',
+    'عدم الإلتزام ببرتوكولات الراديو 2-15',
+    'اعطاء مخالفات غير مستحقه 2-16',
+    'مخالفة قوانين رسائل امن المنشأت 2-17',
+    'عدم سحب سلاح مستخدم 2-18',
+    'رفع نداء استغاثه داخل نداء مسبق 2-19',
+    'ارسال نموذج خاطئ 2-20',
+    'مخالفه قوانين الفصل اثناء السيناريو 2-21',
+    'مخالفة قوانين الإعتقال 2-22',
+    'الانسحاب قبل انتهاء الحاله 2-23',
+    'ادخال حمولة مخالفة 2-24',
+    'ادخال حموله غير واقعيه 2-25',
+    'التخريم اثناء السيناريو 2-26',
+    'مخالفه قوانين السجن 2-27',
+    'عدم الاتزام بالزي العسكري المحدد لرتبتك 2-28',
+    'التوجهه للمركز دون اذن 2-29'
+  ],
+  'الدرجة الثالثة': [
+    'عدم التقيد بقواعد المطارادات 3-1',
+    'سوء التعامل مع الحالات 3-2',
+    'مخالفة قوانين التوجه إلى الحالات 3-3',
+    'مخالفة تعاميم امن المنشات 3-4',
+    'دخول موجه الرقابة دون اذن 3-5',
+    'التهرب من إستلام مركز العمليات 3-6',
+    'مخالفه قوانين العمليات 3-7',
+    'التدخل في صلاحيات الغير 3-8',
+    'تسجيل دخول لمباشرة حالة ثم تسجيل خروجه 3-9',
+    'إضافة شروط هروب غير محددة 3-10',
+    'اطلاق النار بطريقه غير نظاميه 3-11',
+    'تحرير الرهائن بدون اذن 3-12',
+    'مخالفه قوانين المركبات 3-13',
+    'كشف هويه البحث الجنائي 3-14',
+    'الانسحاب من موقع التوجيه بدون اذن 3-15',
+    'عدم الإلتزام بضوابط التفاوض 3-16',
+    'مخالفة قوانين الاجازات 3-17',
+    'اسقاط مواطن اعزل 3-18',
+    'التقصير في العمل الإداري أو الميداني 3-19',
+    'استخدام الكاربون بشكل خاطئ 3-20',
+    'التقصير بمهام ضابط خفر 3-21',
+    'التهاون مع المتهمين 3-22'
+  ],
+  'الدرجة الرابعة': [
+    'العبث بالعهدة العسكرية 4-1',
+    'استخدام السلطة بغير حق 4-2',
+    'إهمال الرتب العليا للميدان 4-3',
+    'الاساءه للشرطة العسكرية 4-4',
+    'عدم احترام المواطنين 4-5',
+    'المناقشة أمام الأفراد 4-6',
+    'التأخر في فتح التوسعات 4-7'
+  ],
+  'الدرجة الخامسة': [
+    'الكذب على المسؤولين 5-1',
+    'مخالفة أمر مباشر 5-2',
+    'التلفظ على مواطن 5-3',
+    'مخالفة قوانين المصادرة 5-4',
+    'عدم تمثيل العسكري بصورة صحيحة 5-5',
+    'استخدام السلطة للمصلحة الشخصية 5-6',
+    'الاساءه لقطاعات اخرى 5-7',
+    'التلاعب بالساعات والتأفيك 5-8',
+    'استخدام السنايبر بشكل خاطئ 5-9'
+  ],
+  'الدرجة السادسة': [
+    'الترصد لزملائك بغاية الحقد 6-1',
+    'عدم احترام الرتب العليا 6-2',
+    'تخريب برتبة عسكرية 6-3',
+    'الإساءة لامن المنشأت 6-4',
+    'تسريب معلومات امن المنشأت 6-5',
+    'عدم تنفيذ الجزاء 6-6'
+  ],
+  'الدرجة السابعة': [
+    'عدم تواجد لفترة طويلة 7-1',
+    'عدم الانصياع لاوامر القادة 7-2',
+    'التهرب الوظيفي 7-3',
+    'فساد عسكري 7-4'
+  ]
+};
+
+// دالة إنشاء قائمة البنود
+function createRuleSelect(selectedRule, index) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'rule-select-wrapper';
+  
+  const select = document.createElement('div');
+  select.className = 'rule-select';
+  select.textContent = selectedRule || 'اختر سبب الحكم';
+  select.title = selectedRule || 'اختر سبب الحكم';
+  
+  wrapper.appendChild(select);
+  
+  select.addEventListener('click', function(e) {
+    e.stopPropagation();
+    openRulesDropdown(select, wrapper, index, selectedRule);
+  });
+  
+  return wrapper;
+}
+
+function openRulesDropdown(selectElement, wrapper, index, selectedRule) {
+  closeAllDropdowns();
+  
+  const overlay = document.createElement('div');
+  overlay.className = 'dropdown-overlay';
+  overlay.classList.add('show');
+  
+  const dropdown = document.createElement('div');
+  dropdown.className = 'rule-dropdown';
+  dropdown.classList.add('show');
+  
+  const header = document.createElement('div');
+  header.className = 'dropdown-header';
+  
+  const title = document.createElement('div');
+  title.className = 'dropdown-title';
+  title.textContent = 'اختيار سبب الحكم';
+  
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'close-dropdown';
+  closeBtn.textContent = 'إغلاق';
+  closeBtn.onclick = () => {
+    dropdown.remove();
+    overlay.remove();
+    selectElement.classList.remove('open');
+  };
+  
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+  
+  const searchBox = document.createElement('div');
+  searchBox.className = 'rule-search-box';
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.className = 'rule-search-input';
+  searchInput.placeholder = 'ابحث في البنود...';
+  searchBox.appendChild(searchInput);
+  
+  const content = document.createElement('div');
+  content.className = 'rule-content';
+  
+  Object.entries(rulesByDegree).forEach(([degree, rules]) => {
+    const group = document.createElement('div');
+    group.className = 'rule-option-group';
+    
+    const groupHeader = document.createElement('div');
+    groupHeader.className = 'rule-group-header';
+    groupHeader.textContent = degree;
+    groupHeader.innerHTML += ' <span style="font-size:11px; opacity:0.7;">▼</span>';
+    
+    const itemsContainer = document.createElement('div');
+    itemsContainer.className = 'rule-group-items';
+    
+    rules.forEach(rule => {
+      const item = document.createElement('div');
+      item.className = 'rule-option-item';
+      item.textContent = rule;
+      
+      if (rule === selectedRule) {
+        item.classList.add('selected');
+      }
+      
+      item.addEventListener('click', function() {
+        selectElement.textContent = rule;
+        selectElement.title = rule;
+        calls[index].rule = rule;
+        saveCalls();
+        
+        dropdown.remove();
+        overlay.remove();
+        selectElement.classList.remove('open');
+      });
+      
+      itemsContainer.appendChild(item);
+    });
+    
+    groupHeader.addEventListener('click', function() {
+      const isHidden = itemsContainer.style.display === 'none';
+      itemsContainer.style.display = isHidden ? 'block' : 'none';
+      groupHeader.innerHTML = degree + (isHidden ? 
+        ' <span style="font-size:11px; opacity:0.7;">▼</span>' : 
+        ' <span style="font-size:11px; opacity:0.7;">▲</span>');
+    });
+    
+    group.appendChild(groupHeader);
+    group.appendChild(itemsContainer);
+    content.appendChild(group);
+  });
+  
+  dropdown.appendChild(header);
+  dropdown.appendChild(searchBox);
+  dropdown.appendChild(content);
+  
+  document.body.appendChild(overlay);
+  document.body.appendChild(dropdown);
+  
+  searchInput.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    
+    content.querySelectorAll('.rule-option-group').forEach(group => {
+      const items = group.querySelectorAll('.rule-option-item');
+      let hasVisibleItems = false;
+      
+      items.forEach(item => {
+        if (item.textContent.toLowerCase().includes(searchTerm)) {
+          item.style.display = 'block';
+          hasVisibleItems = true;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      group.style.display = hasVisibleItems || !searchTerm ? 'block' : 'none';
+    });
+  });
+  
+  overlay.addEventListener('click', function() {
+    dropdown.remove();
+    overlay.remove();
+    selectElement.classList.remove('open');
+  });
+  
+  selectElement.classList.add('open');
+  setTimeout(() => searchInput.focus(), 100);
+}
+
+function closeAllDropdowns() {
+  document.querySelectorAll('.rule-dropdown').forEach(d => d.remove());
+  document.querySelectorAll('.dropdown-overlay').forEach(o => o.remove());
+  document.querySelectorAll('.rule-select').forEach(s => s.classList.remove('open'));
+}
+
+// تهيئة الصفحة عند التحميل
+window.onload = function() {
+  // عرض الصفحة الرئيسية افتراضياً
+  showPage('home');
+};
+</script>
+</body>
+</html>
