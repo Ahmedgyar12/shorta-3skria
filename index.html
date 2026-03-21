@@ -263,6 +263,59 @@
             font-weight: bold;
             color: var(--neon-red);
         }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-item {
+            background: rgba(50, 50, 50, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        .stat-label {
+            color: var(--text-silver);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .stat-value {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .date-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .date-item {
+            margin: 5px 0;
+            padding: 8px 12px;
+            background: rgba(70, 70, 70, 0.7);
+            border-radius: 5px;
+            border-right: 3px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .date-text {
+            flex: 1;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+            direction: ltr;
+        }
+        .date-type {
+            background: rgba(100, 100, 100, 0.9);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
 
         .docs-container { display: flex; flex-direction: column; gap: 30px; max-width: 1200px; margin: 0 auto; }
         
@@ -513,8 +566,8 @@
             <h1 style="text-align: center; margin-bottom: 40px;">لائحة المخالفات والجزاءات التفصيلية</h1>
             <div class="section-header">مخالفات الفصل</div>
             <table class="violation-table">
-                <thead><tr><th>نوع المخالفة</th><th>الجزاء المقرر</th></tr></thead>
-                <tbody><tr><td class="v-name">استقالة فترة تدريب</td><td class="v-penalty">فصل + غرامة بقيمة 1,000,000 + منع من التوظيف 14 يوم</td></tr></tbody>
+                <thead>70a5e<th>نوع المخالفة</th><th>الجزاء المقرر</th> </thead>
+                <tbody> <tr><td class="v-name">استقالة فترة تدريب</td><td class="v-penalty">فصل + غرامة بقيمة 1,000,000 + منع من التوظيف 14 يوم</td></tr> </tbody>
             </table>
         </div>
 
@@ -606,11 +659,10 @@
             }
         }
 
-        // ------------------- نظام رصد الحضور (المحسن) -------------------
-        // تحويل النص الزمني إلى كائن Date
+        // ------------------- نظام رصد الحضور المتكامل -------------------
         function parseCustomDateTime(dateTimeStr) {
             dateTimeStr = dateTimeStr.trim();
-            // تنسيق "Yesterday at 11:10 PM"
+            // "Yesterday at ..."
             if (dateTimeStr.toLowerCase().startsWith('yesterday at')) {
                 const timePart = dateTimeStr.replace(/yesterday at/i, '').trim();
                 const now = new Date();
@@ -628,12 +680,13 @@
                 }
                 return null;
             }
-            // تنسيق "Today at ..." (إذا ورد)
-            if (dateTimeStr.toLowerCase().startsWith('today at')) {
-                const timePart = dateTimeStr.replace(/today at/i, '').trim();
-                const now = new Date();
+            // "Today at ..." أو مجرد وقت مثل "4:18 AM"
+            if (dateTimeStr.toLowerCase().startsWith('today at') || /^\d{1,2}:\d{2}\s+(AM|PM)/i.test(dateTimeStr)) {
+                let timePart = dateTimeStr;
+                if (dateTimeStr.toLowerCase().startsWith('today at')) timePart = dateTimeStr.replace(/today at/i, '').trim();
                 const timeMatch = timePart.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
                 if (timeMatch) {
+                    const now = new Date();
                     let hours = parseInt(timeMatch[1]);
                     const minutes = parseInt(timeMatch[2]);
                     const ampm = timeMatch[3].toUpperCase();
@@ -644,17 +697,17 @@
                 }
                 return null;
             }
-            // تنسيق عادي "3/17/2026 2:35 PM"
+            // تنسيق رقمي: m/d/yyyy hh:mm AM/PM
             const parts = dateTimeStr.split(' ');
             if (parts.length < 3) return null;
             const datePart = parts[0];
             let timePart = parts[1];
             const ampm = parts[2];
-            const dateParts = datePart.split('/');
-            if (dateParts.length !== 3) return null;
-            let month = parseInt(dateParts[0]);
-            let day = parseInt(dateParts[1]);
-            let year = parseInt(dateParts[2]);
+            const dateBits = datePart.split('/');
+            if (dateBits.length !== 3) return null;
+            let month = parseInt(dateBits[0]);
+            let day = parseInt(dateBits[1]);
+            let year = parseInt(dateBits[2]);
             if (year < 100) year += 2000;
             let [hours, minutes] = timePart.split(':').map(Number);
             if (ampm.toUpperCase() === 'PM' && hours !== 12) hours += 12;
@@ -662,184 +715,151 @@
             return new Date(year, month-1, day, hours, minutes);
         }
 
-        function startOfDay(date) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        }
-        function endOfDay(date) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
-        }
-        function minutesDiff(t1, t2) {
-            return Math.max(0, (t2 - t1) / (1000 * 60));
-        }
+        function startOfDay(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+        function endOfDay(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999); }
+        function minutesDiff(a, b) { return Math.max(0, (b - a) / 60000); }
 
-        function splitSessionIntoDays(loginTime, logoutTime) {
+        function splitSession(login, logout) {
             const intervals = [];
-            let currentStart = loginTime;
-            while (currentStart < logoutTime) {
-                let dayEnd = endOfDay(currentStart);
-                let segmentEnd = logoutTime < dayEnd ? logoutTime : dayEnd;
-                if (segmentEnd > currentStart) {
-                    intervals.push({
-                        start: currentStart,
-                        end: segmentEnd,
-                        dayDate: startOfDay(currentStart)
-                    });
+            let cur = login;
+            while (cur < logout) {
+                const dayEnd = endOfDay(cur);
+                const segEnd = logout < dayEnd ? logout : dayEnd;
+                if (segEnd > cur) {
+                    intervals.push({ start: cur, end: segEnd, day: startOfDay(cur) });
                 }
-                currentStart = new Date(dayEnd.getTime() + 1000);
-                if (currentStart > logoutTime) break;
+                cur = new Date(dayEnd.getTime() + 1000);
             }
             return intervals;
         }
 
         function extractUserName(line) {
-            // نمط: [CC| E-118] احمد الاسكندراني [MB7]
             const match = line.match(/\[[^\]]*\]\s*([^\[]+?)\s*\[/);
             if (match && match[1]) return match[1].trim();
-            // fallback
             const fallback = line.split('—')[0].trim();
             return fallback || "غير معروف";
         }
 
-        // قراءة النص الكامل واستخراج الأحداث
         function parseLogsAdvanced(rawText) {
             const lines = rawText.split(/\r?\n/);
             const events = [];
-            let i = 0;
-            while (i < lines.length) {
+            for (let i = 0; i < lines.length; i++) {
                 let line = lines[i].trim();
-                if (line === "") { i++; continue; }
-                
-                // البحث عن سطر يحتوي على التاريخ (إما رقمي أو Yesterday/Today)
-                let timestampMatch = null;
+                if (!line) continue;
+                // استخراج التاريخ والوقت
                 let timestampStr = null;
-                // 1. تنسيق رقمي: MM/DD/YYYY HH:MM AM/PM
                 let dateMatch = line.match(/(\d{1,2}\/\d{1,2}\/\d{2,4}\s+\d{1,2}:\d{2}\s+(?:AM|PM))/i);
-                if (dateMatch) {
-                    timestampStr = dateMatch[0];
-                    timestampMatch = true;
-                }
-                // 2. Yesterday at ...
+                if (dateMatch) timestampStr = dateMatch[0];
                 if (!timestampMatch) {
                     let yestMatch = line.match(/Yesterday at \d{1,2}:\d{2}\s+(?:AM|PM)/i);
-                    if (yestMatch) {
-                        timestampStr = yestMatch[0];
-                        timestampMatch = true;
-                    }
+                    if (yestMatch) timestampStr = yestMatch[0];
                 }
-                // 3. Today at ...
-                if (!timestampMatch) {
+                if (!timestampStr) {
                     let todayMatch = line.match(/Today at \d{1,2}:\d{2}\s+(?:AM|PM)/i);
-                    if (todayMatch) {
-                        timestampStr = todayMatch[0];
-                        timestampMatch = true;
-                    }
+                    if (todayMatch) timestampStr = todayMatch[0];
                 }
-                
-                if (timestampMatch) {
-                    // استخراج اسم المستخدم من نفس السطر (قبل " — " إن وُجدت)
-                    let userPart = line;
-                    const dashIndex = line.indexOf(' — ');
-                    if (dashIndex !== -1) userPart = line.substring(0, dashIndex);
-                    const userName = extractUserName(userPart);
-                    const eventTimestamp = parseCustomDateTime(timestampStr);
-                    if (!eventTimestamp || isNaN(eventTimestamp.getTime())) {
-                        i++;
-                        continue;
-                    }
-                    
-                    // البحث عن الإجراء (دخول/خروج) في السطور التالية (حتى 5 أسطر)
-                    let action = null;
-                    for (let j = 1; j <= 5 && i+j < lines.length; j++) {
-                        const nextLine = lines[i+j].trim();
-                        if (nextLine.includes('تسجيل دخول')) { action = 'login'; break; }
-                        if (nextLine.includes('تسجيل خروج')) { action = 'logout'; break; }
-                    }
-                    if (action) {
-                        events.push({
-                            userKey: userName,
-                            userName: userName,
-                            timestamp: eventTimestamp,
-                            action: action
-                        });
-                    }
+                if (!timestampStr) {
+                    let timeOnly = line.match(/^\d{1,2}:\d{2}\s+(?:AM|PM)/i);
+                    if (timeOnly) timestampStr = timeOnly[0];
                 }
-                i++;
+                if (!timestampStr) continue;
+                const timestamp = parseCustomDateTime(timestampStr);
+                if (!timestamp || isNaN(timestamp.getTime())) continue;
+                // استخراج اسم المستخدم
+                let userPart = line;
+                const dashIndex = line.indexOf(' — ');
+                if (dashIndex !== -1) userPart = line.substring(0, dashIndex);
+                const userName = extractUserName(userPart);
+                // البحث عن الإجراء في السطور التالية
+                let action = null;
+                for (let j = 1; j <= 5 && i+j < lines.length; j++) {
+                    const next = lines[i+j].trim();
+                    if (next.includes('تسجيل دخول')) { action = 'login'; break; }
+                    if (next.includes('تسجيل خروج')) { action = 'logout'; break; }
+                }
+                if (action) {
+                    events.push({ user: userName, time: timestamp, action });
+                }
             }
             return events;
         }
 
-        function computeAttendanceDays(events) {
-            const userEventsMap = new Map();
-            for (const ev of events) {
-                if (!userEventsMap.has(ev.userKey)) userEventsMap.set(ev.userKey, []);
-                userEventsMap.get(ev.userKey).push(ev);
+        function computeAttendance(events) {
+            const userMap = new Map();
+            for (const e of events) {
+                if (!userMap.has(e.user)) userMap.set(e.user, []);
+                userMap.get(e.user).push(e);
             }
             const results = [];
-            for (const [userKey, evList] of userEventsMap.entries()) {
-                evList.sort((a,b) => a.timestamp - b.timestamp);
+            for (const [user, evs] of userMap.entries()) {
+                evs.sort((a,b) => a.time - b.time);
                 const sessions = [];
-                let pendingLogin = null;
-                for (const ev of evList) {
-                    if (ev.action === 'login') pendingLogin = ev.timestamp;
-                    else if (ev.action === 'logout' && pendingLogin !== null) {
-                        if (ev.timestamp > pendingLogin) {
-                            sessions.push({ loginTime: pendingLogin, logoutTime: ev.timestamp });
-                        }
-                        pendingLogin = null;
+                let pending = null;
+                for (const ev of evs) {
+                    if (ev.action === 'login') pending = ev.time;
+                    else if (ev.action === 'logout' && pending) {
+                        if (ev.time > pending) sessions.push({ login: pending, logout: ev.time });
+                        pending = null;
                     }
                 }
-                if (sessions.length === 0) {
-                    results.push({ userName: userKey, daysCount: 0 });
-                    continue;
-                }
-                const dayMinutesMap = new Map();
-                for (const sess of sessions) {
-                    const dayIntervals = splitSessionIntoDays(sess.loginTime, sess.logoutTime);
-                    for (const interval of dayIntervals) {
-                        const dayKey = interval.dayDate.toISOString().slice(0,10);
-                        const duration = minutesDiff(interval.start, interval.end);
-                        if (duration > 0) {
-                            const prev = dayMinutesMap.get(dayKey) || 0;
-                            dayMinutesMap.set(dayKey, prev + duration);
-                        }
+                const dayMinutes = new Map();
+                for (const s of sessions) {
+                    const parts = splitSession(s.login, s.logout);
+                    for (const p of parts) {
+                        const key = p.day.toISOString().slice(0,10);
+                        const mins = minutesDiff(p.start, p.end);
+                        if (mins > 0) dayMinutes.set(key, (dayMinutes.get(key) || 0) + mins);
                     }
                 }
-                let attendedDays = 0;
-                for (const minutes of dayMinutesMap.values()) {
-                    if (minutes >= 50) attendedDays++;
-                }
-                results.push({ userName: userKey, daysCount: attendedDays });
+                let days = 0;
+                for (const mins of dayMinutes.values()) if (mins >= 50) days++;
+                results.push({ user, days });
             }
-            results.sort((a,b) => b.daysCount - a.daysCount);
+            results.sort((a,b) => b.days - a.days);
             return results;
         }
 
-        function renderAttendanceResults(results) {
+        function renderAttendanceStats(events, results) {
             const container = document.getElementById('attendanceResults');
-            if (!results || results.length === 0 || results.every(r => r.daysCount === 0)) {
-                container.innerHTML = '<div class="attendance-card" style="text-align:center;color:#aaa;">⚠️ لم يتم العثور على سجلات دخول/خروج صالحة. تأكد من صيغة النصوص.</div>';
-                return;
-            }
+            const totalLogins = events.filter(e => e.action === 'login').length;
+            const totalLogouts = events.filter(e => e.action === 'logout').length;
+            const totalValid = events.length;
+            let userRows = '';
             let totalDaysAll = 0;
-            let rows = '';
-            for (const res of results) {
-                totalDaysAll += res.daysCount;
-                rows += `<tr><td>${escapeHtml(res.userName)}</td><td>${res.daysCount}</td></tr>`;
+            for (const r of results) {
+                totalDaysAll += r.days;
+                userRows += `<tr><td>${escapeHtml(r.user)}</td><td>${r.days}</td></tr>`;
             }
+            let detailsHtml = '';
+            events.forEach(ev => {
+                const timeStr = ev.time.toLocaleString('ar-EG', { hour12: true });
+                detailsHtml += `
+                    <div class="date-item">
+                        <span class="date-text">${escapeHtml(ev.user)} — ${timeStr} — ${ev.action === 'login' ? 'دخول' : 'خروج'}</span>
+                        <span class="date-type">${ev.action === 'login' ? 'تسجيل دخول' : 'تسجيل خروج'}</span>
+                    </div>
+                `;
+            });
             const html = `
-                <div class="attendance-card">
-                    <table class="results-table">
-                        <thead><tr><th>اسم العضو</th><th>عدد أيام الحضور</th></tr></thead>
-                        <tbody>${rows}</tbody>
-                    </table>
-                    <div class="total-days">إجمالي أيام الحضور لجميع الأعضاء: ${totalDaysAll} يوم</div>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-label">رسائل تسجيل دخول</div><div class="stat-value">${totalLogins}</div></div>
+                    <div class="stat-item"><div class="stat-label">رسائل تسجيل خروج</div><div class="stat-value">${totalLogouts}</div></div>
+                    <div class="stat-item"><div class="stat-label">إجمالي الرسائل الصالحة</div><div class="stat-value">${totalValid}</div></div>
+                    <div class="stat-item"><div class="stat-label">إجمالي أيام الحضور (كل الأعضاء)</div><div class="stat-value">${totalDaysAll}</div></div>
                 </div>
+                <div class="stats-title" style="margin-top:20px;">👥 أيام الحضور لكل عضو (≥50 دقيقة)</div>
+                <table class="results-table">
+                    <thead><tr><th>اسم العضو</th><th>عدد الأيام</th></tr></thead>
+                    <tbody>${userRows}</tbody>
+                </table>
+                <div class="stats-title" style="margin-top:25px;">📝 جميع الرسائل المستخرجة</div>
+                <div class="date-list">${detailsHtml || '<div class="date-item">لا توجد رسائل مستخرجة</div>'}</div>
             `;
             container.innerHTML = html;
         }
 
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
+        function escapeHtml(s) {
+            return s.replace(/[&<>]/g, function(m) {
                 if (m === '&') return '&amp;';
                 if (m === '<') return '&lt;';
                 if (m === '>') return '&gt;';
@@ -855,11 +875,11 @@
             }
             const events = parseLogsAdvanced(rawLogs);
             if (events.length === 0) {
-                document.getElementById('attendanceResults').innerHTML = '<div class="attendance-card" style="text-align:center;color:#aaa;">❌ لم يتم العثور على أحداث صالحة. تأكد من وجود "تسجيل دخول/خروج" مع تواريخ.</div>';
+                document.getElementById('attendanceResults').innerHTML = '<div class="attendance-card" style="text-align:center;color:#aaa;">❌ لم يتم العثور على أحداث صالحة. تأكد من وجود "تسجيل دخول/خروج" مع تواريخ صحيحة.</div>';
                 return;
             }
-            const results = computeAttendanceDays(events);
-            renderAttendanceResults(results);
+            const results = computeAttendance(events);
+            renderAttendanceStats(events, results);
         }
 
         // إضافة مثال افتراضي للمساعدة
