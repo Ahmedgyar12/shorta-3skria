@@ -1142,6 +1142,15 @@
             }
             
             dateObj.setHours(hours, mins, 0, 0);
+
+            // --- التعديل: توحيد الوقت ليكون بتوقيت السعودية (مكة المكرمة) ---
+            // يقوم هذا الكود بحساب فرق التوقيت بين جهاز المستخدم وتوقيت السعودية (UTC+3)
+            let localOffset = dateObj.getTimezoneOffset(); // بالدقائق
+            let ksaOffset = -180; // السعودية (UTC+3) تعادل -180 دقيقة
+            let diffMinutes = localOffset - ksaOffset;
+            dateObj.setMinutes(dateObj.getMinutes() + diffMinutes);
+            // ----------------------------------------------------------------
+            
             return dateObj;
         }
 
